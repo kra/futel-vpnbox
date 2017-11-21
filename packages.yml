@@ -1,0 +1,36 @@
+---
+# distro package setup and installation
+- name: install selinux bindings, required since we start with selinux
+  yum:
+    name: libselinux-python
+    state: present 
+- name: remove yum packages
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "@FCoE Storage Client"
+    - "@iSCSI Storage Client"
+    - "2Network file system client"
+    - "@Storage Availability Tools"
+    - audit
+    - rpcbind
+    - selinux-policy
+    - selinux-policy-targeted
+- name: update yum
+  yum:
+    name: "*"
+    state: latest
+- name: install yum packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - ntp
+    - man
+    - vim-enhanced
+    - openssh
+    - openssh-server
+    - openssh-clients
+    - openssl-devel
+    - cyrus-sasl-plain

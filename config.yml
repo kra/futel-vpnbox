@@ -1,0 +1,29 @@
+---
+# misc config of distro packages
+- name: write postfix config
+  copy:
+    src: src/etc/postfix/main.cf
+    dest: /etc/postfix/main.cf
+- name: restart postfix
+  service:
+    name: postfix
+    state: restarted
+- name: set timezone with zoneinfo
+  file:
+    src: /usr/share/zoneinfo/US/Pacific
+    dest: /etc/localtime
+    state: link
+    force: yes
+- name: set timezone with clock config
+  copy:
+    src: src/etc/sysconfig/clock
+    dest: /etc/sysconfig/clock
+    force: yes
+- name: start ntpd
+  service:
+    name: ntpd
+    state: started
+- name: enable ntpd service
+  service:
+    name: ntpd
+    enabled: yes
