@@ -1,7 +1,7 @@
 ## Deploy a vpn server to Digital Ocean
 
 In conf, have:
-(or create by following README.ssl)
+xo(or create by following README.ssl)
 ca.crt ca.key dh1024.pem
 id_rsa
 server.crt server.csr server.key
@@ -23,12 +23,12 @@ create or check out release branch
 deploy stage:
 
   ansible-playbook -i hosts baseinstall_playbook.yml --vault-password-file=conf/vault_pass.txt
-  src/vpnbox.sh vpnbox-stage.phu73l.net
+  ansible-playbook -i hosts secure_playbook.yml
 
 test:
 
   verify that traffic for client to vpnbox_stage goes through vpnbox_stage
-  view clients in log after "sudo service openvpn status"
+  view connected clients in /etc/openvpn/openvpn-status.log
 
 ## promote stage to prod
 
@@ -44,7 +44,7 @@ change A record for vpnbox-stage to point to new vpnbox-prod-foo|bar.phu73l.net
 remove A record for vpnbox-stage
 wait for DNS to propagate
 refresh iptables on futel-prod.phu73l.net
-this assumes iptables.sh is still in install dir /vagrant
+XXX this assumes iptables.sh is still in install dir /vagrant
   service iptables stop && /vagrant/src/iptables.sh && service iptables save && service iptables start
 stop openvpn on old vpnbox-prod-foo|bar.phu73l.net
   service openvpn stop
@@ -52,6 +52,5 @@ XXX wait 1-30 minutes for sip peers to become reachable?
 test that new vpnbox-prod-foo|bar.phu73l.net is being used
   sip show peers on futel-prod
   service openvpn status on new vpnbox-prod-foo|bar.phu73l.net
-halt old vpnbox-prod-foo|bar
 make a snapshot of old vpnbox-prod-foo|bar.phu73l.net
 destroy droplet old vpnbox-prod-foo|bar.phu73l.net

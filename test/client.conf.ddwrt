@@ -1,0 +1,20 @@
+# client.conf to match that used by ddwrt_startup
+client
+dev tun
+proto udp
+remote vpnbox-prod-foo.phu73l.net 1194
+remote vpnbox-prod-bar.phu73l.net 1194
+resolv-retry infinite
+nobind
+persist-key
+#persist-tun
+tun-mtu 1500
+tun-mtu-extra 32
+mssfix 1450
+ca conf/ca.crt
+cert conf/client/client.crt
+key conf/client/client.key
+comp-lzo
+script-security 2
+up /etc/openvpn/update-resolv-conf
+down /etc/openvpn/update-resolv-conf

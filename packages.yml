@@ -21,11 +21,17 @@
   yum:
     name: "*"
     state: latest
+- name: install epel-release yum package
+  yum:
+    name: epel-release
+    state: present
 - name: install yum packages
   yum:
     name: "{{ item }}"
     state: present
   with_items:
+    - iptables-services
+    - firewalld
     - ntp
     - man
     - vim-enhanced
@@ -34,3 +40,4 @@
     - openssh-clients
     - openssl-devel
     - cyrus-sasl-plain
+    - openvpn

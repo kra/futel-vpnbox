@@ -1,0 +1,19 @@
+# client.conf to test against stage
+
+client
+dev tun
+proto udp
+remote vpnbox-stage.phu73l.net 1194
+#remote vpnbox-prod-foo.phu73l.net 1194
+#remote vpnbox-prod-bar.phu73l.net 1194
+resolv-retry infinite
+nobind
+persist-key
+#persist-tun
+tun-mtu 1500
+tun-mtu-extra 32
+mssfix 1450
+ca creds/ca.crt
+cert creds/client/client-oskar.crt
+key creds/client/client-oskar.key
+comp-lzo

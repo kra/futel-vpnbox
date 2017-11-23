@@ -1,0 +1,30 @@
+---
+- name: load secrets
+  include_vars: "install_openvpn_secrets.yml"
+  no_log: true
+- name: copy openvpn config
+  copy:
+    src: "src/etc/openvpn/{{ item }}"
+    dest: "/etc/openvpn/{{ item }}"
+  with_items:
+    - server.conf
+    - ca.crt
+    - server.crt
+    - server.key
+    - dh1024.pem
+- name: set ip forwarding in proc and the sysctl conf file and reload
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    # sysctl_set: yes
+    reload: yes    
+- name: enable and restart openvpn service
+  service:
+    name: openvpn@server
+    enabled: yes
+    state: started
+
+# - name: make sysctl forward ipv4
+#   lineinfile:
+#     dest: /etc/sysctl.conf
+#     line: "net.ipv4.ip_forward = 1"

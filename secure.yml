@@ -1,0 +1,41 @@
+---
+# firewall, port, ssh configuration
+- name: write sshd config
+  copy:
+    src: src/etc/ssh/sshd_config
+    dest: /etc/ssh/sshd_config
+- name: restart sshd
+  service:
+    name: sshd
+    state: restarted
+- name: stop and disable firewalld
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+- name: stop and enable iptables
+  service:
+    name: iptables
+    state: stopped
+    enabled: yes
+- name: stop and enable ip6tables
+  service:
+    name: ip6tables
+    state: stopped
+    enabled: yes
+- name: update iptables rules
+  script: local/iptables.sh
+- name: update ip6tables rules
+  script: local/ip6tables.sh
+- name: save iptables rules
+  command: service iptables save
+- name: save ip6tables rules
+  command: service ip6tables save
+- name: start iptables
+  service:
+    name: iptables
+    state: started
+- name: start ip6tables
+  service:
+    name: ip6tables
+    state: started
