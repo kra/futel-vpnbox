@@ -42,9 +42,8 @@ rename vpnbox-stage hostname to new vpnbox-prod-foo|bar.phu73l.net
 change A record for vpnbox-stage to point to new vpnbox-prod-foo|bar.phu73l.net
 remove A record for vpnbox-stage
 wait for DNS to propagate
-refresh iptables on futel-prod.phu73l.net
-XXX this assumes iptables.sh is still in install dir /vagrant
-  service iptables stop && /vagrant/src/iptables.sh && service iptables save && service iptables start
+refresh iptables on asteriskserver prod, in futel-installation repo
+  ansible-playbook -i hosts secure_playbook.yml
 stop openvpn on old vpnbox-prod-foo|bar.phu73l.net
   service openvpn stop
 XXX wait 1-30 minutes for sip peers to become reachable?
