@@ -1,7 +1,0 @@
----
-- hosts: baseinstall
-  become: true
-  #ansible_ssh_port: 42422
-  #ansible_ssh_user: futel
-  tasks:
-    - include: secure.yml

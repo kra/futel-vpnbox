@@ -22,8 +22,7 @@ create or check out release branch
 
 deploy stage:
 
-  ansible-playbook -i hosts baseinstall_playbook.yml --vault-password-file=conf/vault_pass.txt
-  ansible-playbook -i hosts secure_playbook.yml
+  ansible-playbook -i hosts playbook.yml --vault-password-file=conf/vault_pass.txt
 
 test:
 
