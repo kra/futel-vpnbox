@@ -38,17 +38,21 @@ We will promote stage to the one not currently running, and then decomission the
 
 rename vpnbox-stage droplet to new vpnbox-prod-foo|bar.phu73l.net
 rename vpnbox-stage hostname to new vpnbox-prod-foo|bar.phu73l.net
-  ssh -t -F src/ssh_config vpnbox-stage.phu73l.net 'sudo hostnamectl set-hostname vpnbox-prod-foo.phu73l.net'
+  ssh -t -F local/ssh_config vpnbox-stage.phu73l.net 'sudo hostnamectl set-hostname vpnbox-prod-foo.phu73l.net'
 change A record for vpnbox-stage to point to new vpnbox-prod-foo|bar.phu73l.net
 remove A record for vpnbox-stage
 wait for DNS to propagate
 refresh iptables on asteriskserver prod, in futel-installation repo
-  ansible-playbook -i hosts secure_playbook.yml
+XXX is this necessary if the vpnbox hostname is the FQDN?
+  ansible-playbook -i hosts update_iptables_playbook.yml
 stop openvpn on old vpnbox-prod-foo|bar.phu73l.net
-  service openvpn stop
+  sudo service openvpn stop
 XXX wait 1-30 minutes for sip peers to become reachable?
 test that new vpnbox-prod-foo|bar.phu73l.net is being used
   sip show peers on futel-prod
-  service openvpn status on new vpnbox-prod-foo|bar.phu73l.net
+  service openvpn@server status on new vpnbox-prod-foo|bar.phu73l.net
+  cat /etc/openvpn/openvpn-status.log on new vpnbox-prod-foo|bar.phu73l.net
 make a snapshot of old vpnbox-prod-foo|bar.phu73l.net
 destroy droplet old vpnbox-prod-foo|bar.phu73l.net
+remove A record for vpnbox-prod-foo|bar.phu73l.net
+remove snapshots of vpnbox-prod-foo|bar.phu73l.net except for most recent

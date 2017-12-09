@@ -17,7 +17,9 @@ cp keys/ca.crt keys/ca.key keys/dh1024.pem keys/server.crt keys/server.csr keys/
 source ./vars
 cp ../conf/ca.crt ../conf/ca.key keys # if not there from last step
 ./build-key client-foo # hit return for all questions then confirm
-cp keys/client-foo.* ../conf/client
+cp keys/client-foo.* ../creds/client
+
+# test
 # set up ../conf/client.conf.ddwrt
 # give client/client-foo.crt client/client-foo.csr
 # client/client-foo.key to client, renaming as client.crt etc

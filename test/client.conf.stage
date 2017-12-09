@@ -3,9 +3,9 @@
 client
 dev tun
 proto udp
-remote vpnbox-stage.phu73l.net 1194
+#remote vpnbox-stage.phu73l.net 1194
 #remote vpnbox-prod-foo.phu73l.net 1194
-#remote vpnbox-prod-bar.phu73l.net 1194
+remote vpnbox-prod-bar.phu73l.net 1194
 resolv-retry infinite
 nobind
 persist-key

@@ -11,9 +11,9 @@ persist-key
 tun-mtu 1500
 tun-mtu-extra 32
 mssfix 1450
-ca conf/ca.crt
-cert conf/client/client.crt
-key conf/client/client.key
+ca creds/ca.crt
+cert creds/client/client-demo.crt
+key creds/client/client-demo.key
 comp-lzo
 script-security 2
 up /etc/openvpn/update-resolv-conf
