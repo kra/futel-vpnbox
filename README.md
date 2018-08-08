@@ -1,7 +1,7 @@
 ## Deploy a vpn server to Digital Ocean
 
 In conf, have:
-xo(or create by following README.ssl)
+(or create by following README.ssl)
 ca.crt ca.key dh1024.pem
 id_rsa
 server.crt server.csr server.key
