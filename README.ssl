@@ -11,12 +11,12 @@ source ./vars
 source ./vars
 ./build-ca
 ./build-key-server server
-cp keys/ca.crt keys/ca.key keys/dh1024.pem keys/server.crt keys/server.csr keys/server.key ~/Documents/futel-installation/vpnbox/conf/
+cp keys/ca.crt keys/ca.key keys/dh1024.pem keys/server.crt keys/server.csr keys/server.key ~/Documents/futel-installation/vpnbox/creds
 
 # set up client with creds named 'client-foo', do this for each client
 source ./vars
-cp ../conf/ca.crt ../conf/ca.key keys # if not there from last step
-./build-key client-foo # hit return for all questions then confirm
+cp ../creds/ca.crt ../creds/ca.key keys # if not there from last step
+./build-key client-foo # hit return for all questions, confirm sign and commit
 cp keys/client-foo.* ../creds/client
 
 # test

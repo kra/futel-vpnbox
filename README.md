@@ -56,3 +56,8 @@ make a snapshot of old vpnbox-prod-foo|bar.phu73l.net
 destroy droplet old vpnbox-prod-foo|bar.phu73l.net
 remove A record for vpnbox-prod-foo|bar.phu73l.net
 remove snapshots of vpnbox-prod-foo|bar.phu73l.net except for most recent
+
+## monitor prod
+
+  ssh -F local/ssh_config vpnbox-prod-bar.phu73l.net
+  view connected clients in /etc/openvpn/openvpn-status.log
