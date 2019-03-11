@@ -1,2 +1,5 @@
 [baseinstall]
 vpnbox-stage.phu73l.net
+
+[digitalocean]
+localhost ansible_connection=local

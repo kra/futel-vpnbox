@@ -6,23 +6,29 @@ ca.crt ca.key dh1024.pem
 id_rsa
 server.crt server.csr server.key
 
-## Deploy stage vpnbox to digital ocean manually
+# ## Deploy stage vpnbox to digital ocean manually
 
-create droplet
-image CentOS 7.x x64
-hostname vpnbox-stage.phu73l.net
-size smallest
-region San Francisco 1
-ssh key (personal key)
+# create droplet
+# image CentOS 7.x x64
+# hostname vpnbox-stage.phu73l.net
+# size smallest
+# region San Francisco 1
+# ssh key (personal key)
 
-create or replace A record for new vpnbox-stage
-wait for DNS to propagate
+# create or replace A record for new vpnbox-stage
+# wait for DNS to propagate
+
+create droplet and subdomain:
 
 create or check out release branch
 
+  ansible-playbook -i deploy/hosts deploy_digitalocean_playbook.yml  --vault-password-file=conf/vault_pass.txt
+
+wait for DNS to propagate with "nslookup vpnbox-stage.phu73l.net"
+
 deploy stage:
 
-  ansible-playbook -i hosts playbook.yml --vault-password-file=conf/vault_pass.txt
+  ansible-playbook -i deploy/hosts playbook.yml --vault-password-file=conf/vault_pass.txt
 
 test:
 
@@ -44,7 +50,7 @@ remove A record for vpnbox-stage
 wait for DNS to propagate
 refresh iptables on asteriskserver prod, in futel-installation repo
 XXX is this necessary if the vpnbox hostname is the FQDN?
-  ansible-playbook -i hosts update_iptables_playbook.yml
+  ansible-playbook -i deploy/hosts update_iptables_playbook.yml
 stop openvpn on old vpnbox-prod-foo|bar.phu73l.net
   sudo service openvpn stop
 XXX wait 1-30 minutes for sip peers to become reachable?
