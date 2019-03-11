@@ -2,8 +2,8 @@
 - hosts: baseinstall
   become: true
   tasks:
-    - include: packages.yml
-    - include: users.yml
-    - include: config.yml
-    - include: install_openvpn.yml
-    - include: secure.yml    
+    - include: deploy/packages.yml
+    - include: deploy/users.yml
+    - include: deploy/config.yml
+    - include: deploy/install_openvpn.yml
+    - include: deploy/secure.yml    
