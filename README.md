@@ -32,8 +32,16 @@ deploy stage:
 
 test:
 
+  Verify that service runs on server:  
+  systemctl status openvpn@server.service
+  Verify that local box can contact TCP server:
+  nmap -Pn -p 1194 vpnbox-stage.phu73l.net
+  Verify that local box can contact UDP server:  
+  nmap -Pn -sU -p 1194 vpnbox-stage.phu73l.net
+  Verify that client works:
+  set up client as directed in futel-vpnclient project
   verify that traffic for client to vpnbox_stage goes through vpnbox_stage
-  view connected clients in /etc/openvpn/openvpn-status.log
+  view connected clients on server in /etc/openvpn/openvpn-status.log
 
 ## promote stage to prod
 
