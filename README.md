@@ -57,7 +57,6 @@ change A record for vpnbox-stage to point to new vpnbox-prod-foo|bar.phu73l.net
 remove A record for vpnbox-stage
 wait for DNS to propagate
 refresh iptables on asteriskserver prod, in futel-installation repo
-XXX is this necessary if the vpnbox hostname is the FQDN?
   ansible-playbook -i deploy/hosts update_iptables_playbook.yml
 stop openvpn on old vpnbox-prod-foo|bar.phu73l.net
   sudo service openvpn stop
