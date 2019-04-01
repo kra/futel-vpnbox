@@ -59,16 +59,21 @@ wait for DNS to propagate
 refresh iptables on asteriskserver prod, in futel-installation repo
   ansible-playbook -i deploy/hosts update_iptables_playbook.yml
 stop openvpn on old vpnbox-prod-foo|bar.phu73l.net
-  sudo service openvpn stop
+  sudo service openvpn@server stop
+  sudo service openvpn@server-tcp stop  
 XXX wait 1-30 minutes for sip peers to become reachable?
 test that new vpnbox-prod-foo|bar.phu73l.net is being used
   sip show peers on futel-prod
   service openvpn@server status on new vpnbox-prod-foo|bar.phu73l.net
+  service openvpn@server-tcp status on new vpnbox-prod-foo|bar.phu73l.net  
   cat /etc/openvpn/openvpn-status.log on new vpnbox-prod-foo|bar.phu73l.net
+  cat /etc/openvpn/openvpn-status-tcp.log on new vpnbox-prod-foo|bar.phu73l.net  
 make a snapshot of old vpnbox-prod-foo|bar.phu73l.net
 destroy droplet old vpnbox-prod-foo|bar.phu73l.net
 remove A record for vpnbox-prod-foo|bar.phu73l.net
 remove snapshots of vpnbox-prod-foo|bar.phu73l.net except for most recent
+
+XXX install futel-substation on new prod box
 
 ## monitor prod
 
